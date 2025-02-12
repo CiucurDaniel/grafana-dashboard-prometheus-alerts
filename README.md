@@ -6,6 +6,23 @@ This dashboard provides insights into Prometheus alerting rules and their curren
 
 The target **Grafana** instance need to have [Infinity Datasource](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/) plugin installed.
 
+## Installation Guide
+
+Ensure url matches your Prometheus url 
+
+```json
+"url": "http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/rules?type=alert"
+```
+
+Ensure the name and id of the infinity datasource is correct based on your Grafana config
+
+```json
+"datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "aec8aw3082xvka"
+}
+```
+
 ## Data Sources
 
 - **Yesoreyeram Infinity Datasource**: Used for handling JSON-based queries.
@@ -40,3 +57,4 @@ The target **Grafana** instance need to have [Infinity Datasource](https://grafa
 - **Fields**:
   - `name`
   - `summary`
+
