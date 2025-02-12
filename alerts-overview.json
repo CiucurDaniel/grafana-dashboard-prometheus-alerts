@@ -1,0 +1,524 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 48,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "aec8aw3082xvka"
+        },
+        "description": "Show the total number of alerts which are currently firing.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "count"
+            ],
+            "fields": "/^state$/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "columns": [],
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "refId": "A",
+            "root_selector": "$.data.groups[*].rules[*].alerts[*]",
+            "source": "url",
+            "type": "json",
+            "url": "http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/rules?type=alert",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "Total firing alerts",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "firing"
+                    }
+                  },
+                  "fieldName": "state"
+                }
+              ],
+              "match": "all",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "aec8aw3082xvka"
+        },
+        "description": "Shows how many alerts we have configured.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 5,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "count"
+            ],
+            "fields": "/^value$/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "value",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "aec8aw3082xvka"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "refId": "A",
+            "root_selector": "$.data.groups[*].rules[*].name",
+            "source": "url",
+            "type": "json",
+            "url": "http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/rules?type=alert",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "Total alerts configured",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "aec8aw3082xvka"
+        },
+        "description": "Shows current firing alerts.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "green",
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto",
+                "wrapText": false
+              },
+              "filterable": true,
+              "inspect": false,
+              "minWidth": 200
+            },
+            "fieldMinMax": false,
+            "mappings": [
+              {
+                "options": {
+                  "critical": {
+                    "color": "dark-red",
+                    "index": 0
+                  },
+                  "info": {
+                    "color": "green",
+                    "index": 2
+                  },
+                  "none": {
+                    "color": "super-light-blue",
+                    "index": 3
+                  },
+                  "warning": {
+                    "color": "semi-dark-yellow",
+                    "index": 1
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "noValue": "---",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "severity"
+              },
+              "properties": [
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "applyToRow": true,
+                    "mode": "basic",
+                    "type": "color-background"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "md",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "aec8aw3082xvka"
+            },
+            "filters": [
+              {
+                "field": "",
+                "operator": "equals",
+                "value": [
+                  ""
+                ]
+              }
+            ],
+            "format": "table",
+            "global_query_id": "",
+            "json_options": {
+              "columnar": false,
+              "root_is_not_array": false
+            },
+            "refId": "A",
+            "root_selector": "$.data.groups[*].rules[*].alerts[*]",
+            "source": "url",
+            "type": "json",
+            "url": "http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/rules?type=alert",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "Firing alerts",
+        "transformations": [
+          {
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "source": "annotations"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "firing"
+                    }
+                  },
+                  "fieldName": "state"
+                }
+              ],
+              "match": "all",
+              "type": "include"
+            }
+          },
+          {
+            "id": "extractFields",
+            "options": {
+              "source": "labels"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "activeAt": true,
+                "annotations": true,
+                "description": true,
+                "endpoint": true,
+                "job": true,
+                "labels": true,
+                "rule_group": true,
+                "runbook_url": true,
+                "service": true,
+                "state": true,
+                "uid": true,
+                "value": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "activeAt": 3,
+                "alertname": 0,
+                "annotations": 4,
+                "container": 10,
+                "description": 7,
+                "endpoint": 11,
+                "instance": 12,
+                "job": 13,
+                "labels": 5,
+                "namespace": 14,
+                "pod": 15,
+                "reason": 16,
+                "rule_group": 19,
+                "runbook_url": 8,
+                "service": 17,
+                "severity": 9,
+                "state": 2,
+                "summary": 1,
+                "uid": 18,
+                "value": 6
+              },
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "aec8aw3082xvka"
+        },
+        "description": "Show the alert names and description.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 4,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "aec8aw3082xvka"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "json_options": {
+              "columnar": false,
+              "root_is_not_array": false
+            },
+            "refId": "A",
+            "root_selector": "$.data.groups[*].rules[*]",
+            "source": "url",
+            "type": "json",
+            "url": "http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/rules?type=alert",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "Alert collection",
+        "transformations": [
+          {
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "keepTime": false,
+              "replace": false,
+              "source": "annotations"
+            }
+          },
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "include": {
+                "names": [
+                  "name",
+                  "summary"
+                ]
+              }
+            }
+          }
+        ],
+        "type": "table"
+      }
+    ],
+    "preload": false,
+    "schemaVersion": 40,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "AlertsOverview",
+    "uid": "aecqi8p4wacxse",
+    "version": 15,
+    "weekStart": ""
+}
