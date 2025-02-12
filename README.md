@@ -23,6 +23,29 @@ Ensure the name and id of the infinity datasource is correct based on your Grafa
 }
 ```
 
+Example from `kube-prometheus-stack`:
+
+```yaml
+grafana:
+    # INFO: Install plugins for Grafana 
+    plugins:
+      - yesoreyeram-infinity-datasource
+
+additionalDataSources:
+    - id: 3
+      uid: "aec8aw3082xvka"
+      orgId: 1
+      name: "yesoreyeram-infinity-datasource"
+      type: "yesoreyeram-infinity-datasource"
+      basicAuth: false
+      isDefault: false
+      jsonData:
+        global_queries: []
+      readOnly: false
+      apiVersion: ""
+      editable: false
+```
+
 ## Data Sources
 
 - **Yesoreyeram Infinity Datasource**: Used for handling JSON-based queries.
